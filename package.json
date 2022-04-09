@@ -29,8 +29,7 @@
         "node": ">=16.0.0"
     },
     "files": [
-        "multiloader.mjs",
-        "esm-loader.d.ts"
+        "multiloader.mjs"
     ],
     "exports": {
         ".": "./multiloader.mjs",
@@ -38,6 +37,7 @@
         "./*": "./multiloader.mjs?*"
     },
     "devDependencies": {
-        "@types/node": "^17.0.23"
+        "@types/node": "^17.0.23",
+        "typings-esm-loader": "github:jhmaster2000/typings-esm-loader"
     }
 }
