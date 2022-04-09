@@ -2,6 +2,6 @@
 Node.js ESM multiloader
 
 Usage:
-```bash
+```sh
 node --loader loader2 --loader ./loader1 --loader multiloader file.js
 ```

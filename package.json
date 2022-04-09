@@ -38,6 +38,6 @@
     },
     "devDependencies": {
         "@types/node": "^17.0.23",
-        "typings-esm-loader": "github:jhmaster2000/typings-esm-loader"
+        "typings-esm-loader": "^1.0.0"
     }
 }
