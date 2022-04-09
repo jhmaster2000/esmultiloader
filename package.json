@@ -1,0 +1,40 @@
+{
+    "name": "multiloader",
+    "version": "1.0.0",
+    "description": "Node.js ESM multiloader",
+    "type": "module",
+    "main": "multiloader.mjs",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "homepage": "https://github.com/jhmaster2000/multiloader#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jhmaster2000/multiloader.git"
+    },
+    "bugs": {
+        "url": "https://github.com/jhmaster2000/multiloader/issues"
+    },
+    "keywords": [
+        "experimental",
+        "node",
+        "custom",
+        "esm",
+        "loader",
+        "multiloader"
+    ],
+    "author": "jhmaster",
+    "license": "MIT",
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "files": [
+        "multiloader.mjs"
+    ],
+    "exports": {
+        "/": "./multiloader.mjs"
+    },
+    "devDependencies": {
+        "@types/node": "^17.0.23"
+    }
+}
