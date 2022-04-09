@@ -16,7 +16,7 @@ const CHAINING_MODE = config.find(([opt, v]) => (opt === 'iterative' || opt === 
 
 const logger = /** @type {const} */ ({
     enabled: config.find(([opt, v]) => opt === 'debug' && v === true) && true,
-    get log() { return this.enabled ? (...msg) => console.log('multiloader>', ...msg) : () => {} }
+    get log() { return this.enabled ? (...msg) => console.log('esmultiloader>', ...msg) : () => {} }
 });
 
 logger.log('url:', import.meta.url);
