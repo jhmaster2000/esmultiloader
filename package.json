@@ -29,13 +29,13 @@
         "node": ">=16.0.0"
     },
     "files": [
-        "multiloader.mjs"
+        "multiloader.mjs",
+        "esm-loader.d.ts"
     ],
     "exports": {
         ".": "./multiloader.mjs",
         "./": "./multiloader.mjs",
-        "./?*": "./multiloader.mjs?*",
-        "./#*": "./multiloader.mjs#*"
+        "./*": "./multiloader.mjs?*"
     },
     "devDependencies": {
         "@types/node": "^17.0.23"

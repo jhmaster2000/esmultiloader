@@ -5,10 +5,17 @@ import { pathToFileURL } from 'url';
 import path from 'path';
 import yargs from 'yargs';
 
-const argv = /** @type {{ loader?: string | string[], experimentalLoader?: string | string[] }} */ (yargs(process.execArgv).argv);
+const config = (new URL(import.meta.url).search.trim().toLowerCase() || '?').slice(1).split('/').filter(s => s).map(opt => {
+    const split = opt.split('=');
+    return split.length === 1 ? /** @type {const} */ ([split[0], true]) : /** @type {const} */ ([split.slice(0, -1).join('='), split.at(-1)]);
+});
+
+// ltr: https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-iterative.md
+// rtl (default): https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-middleware.md
+const CHAINING_MODE = config.find(([opt, v]) => (opt === 'iterative' || opt === 'ltr') && v === true) && 'ltr' || 'rtl';
 
 const logger = /** @type {const} */ ({
-    enabled: true,
+    enabled: config.find(([opt, v]) => opt === 'debug' && v === true) && true,
     get log() { return this.enabled ? console.log : () => {} },
     get dir() { return this.enabled ? console.dir : () => {} }
 });
@@ -16,8 +23,11 @@ const logger = /** @type {const} */ ({
 logger.dir(import.meta.url);
 logger.dir(process.cwd());
 
+const argv = /** @type {{ loader?: string | string[], experimentalLoader?: string | string[] }} */ (yargs(process.execArgv).argv);
+const specifiers = [argv.loader || [], argv.experimentalLoader || []].flat().slice(0, -1);
+if (CHAINING_MODE === 'rtl') specifiers.reverse();
+
 const loaders = /** @type {Map<Loader, string>} */ (new Map());
-const specifiers = [argv.loader || [], argv.experimentalLoader || []].flat().slice(0, -1).reverse();
 const hooks = {
     /** @type {Map<resolve, string>} */
     resolve: new Map(),
