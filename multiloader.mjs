@@ -1,6 +1,8 @@
 /// <reference types="./esm-loader" />
 /// @ts-check
 
+import { pathToFileURL } from 'url';
+import path from 'path';
 import yargs from 'yargs';
 
 const argv = /** @type {{ loader?: string | string[], experimentalLoader?: string | string[] }} */ (yargs(process.execArgv).argv);
@@ -10,6 +12,9 @@ const logger = /** @type {const} */ ({
     get log() { return this.enabled ? console.log : () => {} },
     get dir() { return this.enabled ? console.dir : () => {} }
 });
+
+logger.dir(import.meta.url);
+logger.dir(process.cwd());
 
 const loaders = /** @type {Map<Loader, string>} */ (new Map());
 const specifiers = [argv.loader || [], argv.experimentalLoader || []].flat().slice(0, -1).reverse();
@@ -23,7 +28,8 @@ const hooks = {
 };
 
 for (const specifier of specifiers) {
-    const loader = /** @type {Loader} */ (await import(specifier));
+    const loaderSpecifier = /^\.?\.?\//.test(specifier) ? pathToFileURL(path.resolve(process.cwd(), specifier)).href : specifier;
+    const loader = /** @type {Loader} */ (await import(loaderSpecifier));
     loaders.set(loader, specifier);
 
     if (typeof loader.resolve === 'function') hooks.resolve.set(loader.resolve, specifier);
@@ -31,7 +37,6 @@ for (const specifier of specifiers) {
     if (typeof loader.globalPreload === 'function') hooks.globalPreload.set(loader.globalPreload, specifier);
 }
 
-logger.dir(import.meta.url);
 logger.dir(loaders);
 logger.dir(hooks);
 

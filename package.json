@@ -32,7 +32,10 @@
         "multiloader.mjs"
     ],
     "exports": {
-        "/": "./multiloader.mjs"
+        ".": "./multiloader.mjs",
+        "./": "./multiloader.mjs",
+        "./?*": "./multiloader.mjs?*",
+        "./#*": "./multiloader.mjs#*"
     },
     "devDependencies": {
         "@types/node": "^17.0.23"
