@@ -16,12 +16,11 @@ const CHAINING_MODE = config.find(([opt, v]) => (opt === 'iterative' || opt === 
 
 const logger = /** @type {const} */ ({
     enabled: config.find(([opt, v]) => opt === 'debug' && v === true) && true,
-    get log() { return this.enabled ? console.log : () => {} },
-    get dir() { return this.enabled ? console.dir : () => {} }
+    get log() { return this.enabled ? (...msg) => console.log('multiloader>', ...msg) : () => {} }
 });
 
-logger.dir(import.meta.url);
-logger.dir(process.cwd());
+logger.log('url:', import.meta.url);
+logger.log('cwd:', process.cwd());
 
 const argv = /** @type {{ loader?: string | string[], experimentalLoader?: string | string[] }} */ (yargs(process.execArgv).argv);
 const specifiers = [argv.loader || [], argv.experimentalLoader || []].flat().slice(0, -1);
@@ -47,8 +46,8 @@ for (const specifier of specifiers) {
     if (typeof loader.globalPreload === 'function') hooks.globalPreload.set(loader.globalPreload, specifier);
 }
 
-logger.dir(loaders);
-logger.dir(hooks);
+logger.log('loaders resolved:', loaders);
+logger.log('hooks resolved:', hooks);
 
 /** @type {resolve} */
 export async function resolve(specifier, context, defaultResolve) {
@@ -63,7 +62,7 @@ export async function resolve(specifier, context, defaultResolve) {
         const [resolveHook, name] = [...hooks.resolve][index] ?? [];
         if (!resolveHook) return await defaultResolve(specifier, context, defaultResolve);
 
-        logger.log(`invoking resolve hook #${index} from loader ${name}`);
+        logger.log(`invoking resolve hook #${index} from loader ${name} for specifier ${specifier}`);
         return await resolveHook(specifier, context, async (specifier, context, defaultResolve) => {
             // Hook passed to the next hook in the chain.
             return await invokeResolveHook(index + 1, specifier, context);
@@ -84,7 +83,7 @@ export async function load(url, context, defaultLoad) {
         const [loadHook, name] = [...hooks.load][index] ?? [];
         if (!loadHook) return await defaultLoad(url, context, defaultLoad);
 
-        logger.log(`invoking load hook #${index} from loader ${name}`);
+        logger.log(`invoking load hook #${index} from loader ${name} for url ${url}`);
         return await loadHook(url, context, async (url, context, defaultLoad) => {
             // Hook passed to the next hook in the chain.
             return await invokeLoadHook(index + 1, url, context);
