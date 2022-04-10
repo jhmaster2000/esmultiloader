@@ -6,7 +6,7 @@
 [![npm release][npm-image]][npm-url]
 [![node-current][node-image]][node-url]
 
-- Zero dependencies
+- Fast and lightweight
 - No configuration required, but configurable if needed
 - Usage compliant with Node's own [loader middleware chaining proposal](https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-middleware.md)
 - Supports all three `resolve`, `load` and `globalPreload` loader hooks
