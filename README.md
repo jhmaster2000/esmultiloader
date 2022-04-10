@@ -1,9 +1,15 @@
 # ESMultiloader
 > Node.js ESM loader for chaining multiple custom loaders.
 
+[![license][license-image]][license-url]
+[![GitHub version][github-image]][github-url]
+[![npm release][npm-image]][npm-url]
+[![node-current][node-image]][node-url]
+
 - Zero dependencies
 - No configuration required, but configurable if needed
 - Usage compliant with Node's own [loader middleware chaining proposal](https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-middleware.md)
+- Supports all three `resolve`, `load` and `globalPreload` loader hooks
 
 ## Install
 ```sh
@@ -31,3 +37,12 @@ Option | Type | Default | Description
 `iterative` or `ltr` | Boolean | `false` | Chain loaders from left-to-right as described by the [iterative chaining proposal](https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-iterative.md) instead of right-to-left. (Mutually exclusive with the option below)
 `middleware` or `rtl` | Boolean | `true` | Chain loaders from right-to-left as described by the [middleware chaining proposal](https://github.com/nodejs/loaders/blob/main/doc/design/proposal-chaining-middleware.md) instead of left-to-right. (Mutually exclusive with the option above)
 `debug` | Boolean | `false` | Enable printing of `esmultiloader` debug logs.
+
+[github-url]:https://github.com/jhmaster2000/esmultiloader
+[github-image]:https://img.shields.io/github/package-json/v/jhmaster2000/esmultiloader.svg
+[license-url]:https://github.com/jhmaster2000/esmultiloader/blob/master/LICENSE
+[license-image]:https://img.shields.io/npm/l/esmultiloader.svg
+[npm-url]:http://npmjs.org/package/esmultiloader
+[npm-image]:https://img.shields.io/npm/v/esmultiloader.svg?color=darkred&label=npm%20release
+[node-url]:https://nodejs.org/en/download
+[node-image]:https://img.shields.io/node/v/esmultiloader.svg
