@@ -1,19 +1,19 @@
 {
     "name": "esmultiloader",
-    "version": "1.0.0-beta.1",
-    "description": "Node.js ESM loader for chaining multiple custom ESM loaders.",
+    "version": "1.0.0-beta.2",
+    "description": "Node.js ESM loader for chaining multiple custom loaders.",
     "type": "module",
     "main": "esmultiloader.mjs",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "homepage": "https://github.com/jhmaster2000/multiloader#readme",
+    "homepage": "https://github.com/jhmaster2000/esmultiloader#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/jhmaster2000/multiloader.git"
+        "url": "git+https://github.com/jhmaster2000/esmultiloader.git"
     },
     "bugs": {
-        "url": "https://github.com/jhmaster2000/multiloader/issues"
+        "url": "https://github.com/jhmaster2000/esmultiloader/issues"
     },
     "keywords": [
         "experimental",

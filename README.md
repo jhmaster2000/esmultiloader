@@ -1,5 +1,5 @@
 # ESMultiloader
-> Node.js ESM loader for chaining multiple custom ESM loaders.
+> Node.js ESM loader for chaining multiple custom loaders.
 
 - Zero dependencies
 - No configuration required, but configurable if needed
