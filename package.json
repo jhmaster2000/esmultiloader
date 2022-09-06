@@ -28,7 +28,7 @@
     "author": "jhmaster",
     "license": "MIT",
     "engines": {
-        "node": ">=16.0.0"
+        "node": ">=16.12 <=18.5"
     },
     "files": [
         "esmultiloader.mjs"
