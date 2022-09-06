@@ -1,6 +1,11 @@
 # ESMultiloader
 > Node.js ESM loader for chaining multiple custom loaders.
 
+> **Warning**
+> **This package has been deprecated**
+>
+> Multiple loaders are [natively supported by Node.js v18.6+](https://nodejs.org/api/esm.html#loaders), you may still use this package for Node.js v16.12 to v18.5, but it will not be being maintained.
+
 [![license][license-image]][license-url]
 [![GitHub version][github-image]][github-url]
 [![npm release][npm-image]][npm-url]
